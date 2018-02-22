@@ -28,5 +28,5 @@ module.exports = function check(str, bracketsConfig)
   else
    {
     return false;
-  }
+   }
 }
