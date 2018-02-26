@@ -1,32 +1,34 @@
-module.exports = function check(str, bracketsConfig)
- {
-  var ob = 0;
-  var cb = 0;
-  var oq = 0;
-  var cq = 0;
-  var os = 0;
-  var cs = 0;
-  var c = 0;
-  var st = 0;
+module.exports = function check(str, bracketsConfig) {
+// your solution
+var stack = [];
+var check,ch=0;
+for (i=0; i<str.length;i++) {
+c=str[i];
+if (c == '{' || c == '[' || c == '(' ) {
+stack.push(c);
+} else
+if (c=='|' && ch==0) {stack.push(c);ch++;}else {
+if (stack) {
+check = stack.pop();
+if (c == '}' && check != '{') {
+return false;
+} else if (c == ']' && check != '[') {
+return false;
+} else if (c == ')' && check != '(') {
+return false;}
+else if (c == '|' && check != '|') {
+return false;}
+else if (c == '|' && check == '|') {
+ch=0;}
 
-  for(var i=0;i<str.length;i++)
-  {
-  if (str[i] = "(")  {ob++}
-  if (str[i] = ")") {cb++}
-  if (str[i] = "{") {oq++}
-  if (str[i] = "}") {cq++}
-  if (str[i] = "[") {os++}
-  if (str[i]= "]") {cs++}
-  if (str[i]= ",") {c++}
-  if (str[i]= "|") {st++}
-  }
 
-  if((ob-cb+oq-cq+os-cs)==0 && c%2==0 && st%2==0)
-  {
-    return true;
-  }
-  else
-   {
-    return false;
-   }
+} else {
+return false;
+}
+}
+}
+
+if ( stack.pop() ) return false;
+
+return true;
 }
